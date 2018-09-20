@@ -8,11 +8,18 @@ import java.util.List;
 import image.pdf.com.StartRun;
 import image.pdf.com.util.DateUtil;
 import image.pdf.com.util.ImgToPdf;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -27,6 +34,59 @@ public class TopPanel {
 	private List<File> moreFile=new ArrayList<>();
 	private String fileDoc=System.getProperty("user.home")+File.separator+"Desktop";
 	
+	/**
+	 * 默认导航栏
+	 */
+    public MenuBar  createTopMenu(){
+    	
+	    Menu fileMenu = new Menu("文本");
+	    MenuItem newMenuItem = new MenuItem("文本过滤");
+	    MenuItem exitMenuItem = new MenuItem("退出");
+	    exitMenuItem.setOnAction(actionEvent -> Platform.exit());
+
+	    fileMenu.getItems().addAll(newMenuItem,new SeparatorMenuItem(), exitMenuItem);
+
+	    Menu pdfMenu = new Menu("pdf");
+	    MenuItem pdfMenuItem = new MenuItem("图片转pdf");
+	    pdfMenuItem.setOnAction((ActionEvent e)->{
+	    	VBox topBox=new VBox();
+			topBox.getChildren().addAll(createTopMenu(),createActivityPane(StartRun.getStage()));
+			StartRun.setTop(topBox);
+		}); 
+	    
+	    
+		
+	    pdfMenu.getItems().add(pdfMenuItem);
+
+	    Menu imgMenu = new Menu("图片");
+	    MenuItem imgMenuItem = new MenuItem("图片移动");
+	    imgMenu.getItems().add(imgMenuItem);
+	    
+	    Menu aboutMenu = new Menu("关于");
+	    aboutMenu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+	    		
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("作者");
+	            alert.setHeaderText(null);
+	            alert.setContentText("王宗会个人工具");
+
+	            alert.showAndWait();
+            }});
+	    
+	    MenuItem authorMenuItem = new MenuItem("作者");
+
+	    aboutMenu.getItems().addAll(authorMenuItem);
+	    
+	    MenuBar menuBar=new MenuBar();
+	    menuBar.getMenus().addAll(fileMenu, pdfMenu, imgMenu,aboutMenu);
+	    return menuBar;
+    }
+	
+	/**
+	 * 处理pdf
+	 */
 	public  HBox createActivityPane(Stage stage){
 		HBox  title=new HBox();
 		
@@ -65,21 +125,8 @@ public class TopPanel {
 				StartRun.setConter();
 			}
 		});
-		
-		Button aboutBtn = new Button("关于");
-		setborderColor(aboutBtn);
-		
-	    aboutBtn.setOnAction((ActionEvent e) -> {
-	    	 Alert alert = new Alert(AlertType.INFORMATION);
-	            alert.setTitle("说明");
-	            alert.setHeaderText(null);
-	            alert.setContentText("个人工具");
-
-	            alert.showAndWait();
-	     });
 	    
-	    
-	    title.getChildren().setAll(oneFileBtn,moreFileBtn,createBtn,aboutBtn);
+	    title.getChildren().setAll(oneFileBtn,moreFileBtn,createBtn);
 	    return title;
 	}
 	

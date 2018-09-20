@@ -95,7 +95,6 @@ public class ImgToPdf {
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
