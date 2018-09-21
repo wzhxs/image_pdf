@@ -1,9 +1,13 @@
 package image.pdf.com.layout;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import image.pdf.com.StartRun;
+import image.pdf.com.util.FileUtil;
+import image.pdf.com.util.StringUtil;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -31,11 +35,14 @@ public class ConterPanel {
 	    grid.setPadding(new Insets(15, 5, 5, 20));
 	    TextField inputText = new TextField();
 	    
+	    TextField filterText = new TextField();
+	    TextField spaceText = new TextField();
+	    
 		Button choseBtn=new Button("选择");
 		choseBtn.setOnAction((ActionEvent e)->{
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("MoreFile");
-			fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));                 
+			fileChooser.setInitialDirectory(new File(FileUtil.getDesktop()));                 
 	        fileChooser.getExtensionFilters().addAll(
 	            new FileChooser.ExtensionFilter("All File", "*.*")
 	        );
@@ -45,18 +52,42 @@ public class ConterPanel {
 				inputText.setText(txtFile.get(0).toString());	
 			}
 		});
+		Button createBtn=new Button("生成");
+		createBtn.setOnAction((ActionEvent e)->{
+			String fileUrl=inputText.getText();
+			if(StringUtil.isNotEmpty(fileUrl)){
+				String fileter=filterText.getText();
+				String[] filterList = new String[]{};
+				if(StringUtil.isNotEmpty(fileter)){
+					filterList=fileter.split(",");
+				}
+				Map<String,String> spaceMap=new HashMap<>();
+				String space=spaceText.getText();
+				if(StringUtil.isNotEmpty(space)){
+					String[] hashMap=space.split("\\,");
+					String[] key;
+					for(String hash:hashMap){
+						key=hash.split("\\=");
+						spaceMap.put(key[0], key[1]);
+					}
+				}
+				
+				FileUtil.filterFile(fileUrl, filterList, spaceMap);
+			}
+		});
 		
 		int row=3;  //第几行
 	    grid.add(new Label("文件："), 0, row);
 	    grid.add(inputText, 1, row);
 	    grid.add(choseBtn, 2, row);
+	    grid.add(createBtn, 3, row);
 	   
 	    
-	    TextField filterText = new TextField();
+	    
 	    grid.add(new Label("过滤："), 0, row+2);
 	    grid.add(filterText, 1, row+2);
 	    
-	    TextField spaceText = new TextField();
+	    
 	    grid.add(new Label("替换："), 0, row+4);
 	    grid.add(spaceText, 1, row+4);
 	    

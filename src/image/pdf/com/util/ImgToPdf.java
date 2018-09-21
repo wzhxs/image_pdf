@@ -15,7 +15,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfWriter;
 
-public class ImgToPdf {
+public final class ImgToPdf {
 	
 	/**
 	 * 多文件生成pdf

@@ -3,7 +3,7 @@ package image.pdf.com.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateUtil {
+public final class DateUtil {
 
 	/**
 	 * 获取当前时间
