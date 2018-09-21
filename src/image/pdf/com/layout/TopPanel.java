@@ -17,10 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * 左侧面板
@@ -40,18 +38,22 @@ public class TopPanel {
     public MenuBar  createTopMenu(){
     	
 	    Menu fileMenu = new Menu("文本");
-	    MenuItem newMenuItem = new MenuItem("文本过滤");
-	    MenuItem exitMenuItem = new MenuItem("退出");
-	    exitMenuItem.setOnAction(actionEvent -> Platform.exit());
+	    MenuItem txtMenuItem = new MenuItem("文本过滤");
+	    txtMenuItem.setOnAction((ActionEvent e)->{
+	    	StartRun.setTop(createTopMenu());
+			StartRun.setConter(new ConterPanel().createTxtPanel());
+		});
+	    
 
-	    fileMenu.getItems().addAll(newMenuItem,new SeparatorMenuItem(), exitMenuItem);
+	    fileMenu.getItems().addAll(txtMenuItem);
 
 	    Menu pdfMenu = new Menu("pdf");
 	    MenuItem pdfMenuItem = new MenuItem("图片转pdf");
 	    pdfMenuItem.setOnAction((ActionEvent e)->{
 	    	VBox topBox=new VBox();
-			topBox.getChildren().addAll(createTopMenu(),createActivityPane(StartRun.getStage()));
+			topBox.getChildren().addAll(createTopMenu(),createActivityPane());
 			StartRun.setTop(topBox);
+			StartRun.setConter();
 		}); 
 	    
 	    
@@ -63,7 +65,9 @@ public class TopPanel {
 	    imgMenu.getItems().add(imgMenuItem);
 	    
 	    Menu aboutMenu = new Menu("关于");
-	    aboutMenu.setOnAction(new EventHandler<ActionEvent>() {
+	    
+	    MenuItem authorMenuItem = new MenuItem("作者");
+	    authorMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 	    		
@@ -71,13 +75,13 @@ public class TopPanel {
 	            alert.setTitle("作者");
 	            alert.setHeaderText(null);
 	            alert.setContentText("王宗会个人工具");
-
 	            alert.showAndWait();
-            }});
+        }});
 	    
-	    MenuItem authorMenuItem = new MenuItem("作者");
+	    MenuItem exitMenuItem = new MenuItem("退出");
+	    exitMenuItem.setOnAction(actionEvent -> Platform.exit());
 
-	    aboutMenu.getItems().addAll(authorMenuItem);
+	    aboutMenu.getItems().addAll(authorMenuItem,exitMenuItem);
 	    
 	    MenuBar menuBar=new MenuBar();
 	    menuBar.getMenus().addAll(fileMenu, pdfMenu, imgMenu,aboutMenu);
@@ -87,14 +91,15 @@ public class TopPanel {
 	/**
 	 * 处理pdf
 	 */
-	public  HBox createActivityPane(Stage stage){
+	public  HBox createActivityPane(){
+		
 		HBox  title=new HBox();
 		
 		Button oneFileBtn = new Button("单文件");
 		setborderColor(oneFileBtn);
 		oneFileBtn.setOnAction((ActionEvent e)->{
 			StartRun.fileChooser.setTitle("OneFile");
-			oneFile=StartRun.fileChooser.showOpenMultipleDialog(stage);
+			oneFile=StartRun.fileChooser.showOpenMultipleDialog(StartRun.getStage());
 			if(oneFile!=null&&oneFile.size()>0){
 				rightPanel.addImage(oneFile);	
 			}
@@ -104,7 +109,7 @@ public class TopPanel {
 		setborderColor(moreFileBtn);
 		moreFileBtn.setOnAction((ActionEvent e)->{
 			StartRun.fileChooser.setTitle("MoreFile");
-			moreFile =StartRun.fileChooser.showOpenMultipleDialog(stage);
+			moreFile =StartRun.fileChooser.showOpenMultipleDialog(StartRun.getStage());
 			if(moreFile!=null&&moreFile.size()>0){
 				rightPanel.addImage(moreFile);	
 			}

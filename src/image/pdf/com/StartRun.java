@@ -2,6 +2,7 @@ package image.pdf.com;
 
 import java.io.File;
 
+import image.pdf.com.layout.ConterPanel;
 import image.pdf.com.layout.RightPanel;
 import image.pdf.com.layout.TopPanel;
 import javafx.application.Application;
@@ -36,7 +37,7 @@ public class StartRun extends Application{
 		
 		//pane放入Scen中
 		Scene scene=new Scene(layout,910,600);
-		setConter();
+		setConter(new ConterPanel().createTxtPanel());
 		stage.setScene(scene);
 		stage.setResizable(false);
 		
