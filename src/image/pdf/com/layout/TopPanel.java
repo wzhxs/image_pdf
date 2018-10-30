@@ -7,7 +7,7 @@ import java.util.List;
 
 import image.pdf.com.StartRun;
 import image.pdf.com.util.DateUtil;
-import image.pdf.com.util.ImgToPdf;
+import image.pdf.com.util.ImgUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +30,8 @@ public class TopPanel {
 	private RightPanel rightPanel=new RightPanel();
 	private List<File> oneFile=new ArrayList<>();
 	private List<File> moreFile=new ArrayList<>();
+	private List<File> getFile=new ArrayList<>();
+	
 	private String fileDoc=System.getProperty("user.home")+File.separator+"Desktop";
 	
 	/**
@@ -61,8 +63,16 @@ public class TopPanel {
 	    pdfMenu.getItems().add(pdfMenuItem);
 
 	    Menu imgMenu = new Menu("图片");
-	    MenuItem imgMenuItem = new MenuItem("图片移动");
-	    imgMenu.getItems().add(imgMenuItem);
+	    MenuItem imgChange=new MenuItem("图片转换");
+	    imgChange.setOnAction((ActionEvent e)->{
+	    	VBox topBox=new VBox();
+			topBox.getChildren().addAll(createTopMenu(),changeImagePan());
+			StartRun.setTop(topBox);
+			StartRun.setConter();
+	    });
+	    
+	    MenuItem imgMv = new MenuItem("图片移动");
+	    imgMenu.getItems().addAll(imgChange,imgMv);
 	    
 	    Menu aboutMenu = new Menu("关于");
 	    
@@ -87,14 +97,45 @@ public class TopPanel {
 	    menuBar.getMenus().addAll(fileMenu, pdfMenu, imgMenu,aboutMenu);
 	    return menuBar;
     }
+    
+    /**
+     * 图片转换
+     */
+    public HBox changeImagePan(){
+    	
+		HBox  title=new HBox();
+		Button moreFileBtn = new Button("选择");
+		setborderColor(moreFileBtn);
+		moreFileBtn.setOnAction((ActionEvent e)->{
+			StartRun.fileChooser.setTitle("MoreFile");
+			getFile =StartRun.fileChooser.showOpenMultipleDialog(StartRun.getStage());
+			if(getFile!=null&&getFile.size()>0){
+				rightPanel.addImage(getFile);	
+			}
+		});
+		
+		Button createBtn = new Button("tif转jpg");
+		setborderColor(createBtn);
+		createBtn.setOnAction((ActionEvent e) ->{
+			 if(getFile!=null&&getFile.size()>0){
+				 for(File file:getFile){
+					 ImgUtil.tifToJpg(file.toString());
+				 }
+				getFile=new ArrayList<>();
+				StartRun.setConter();
+			}
+		});
+	    
+	    title.getChildren().setAll(moreFileBtn,createBtn);
+	    return title;
+    }
 	
 	/**
 	 * 处理pdf
 	 */
 	public  HBox createActivityPane(){
-		
+
 		HBox  title=new HBox();
-		
 		Button oneFileBtn = new Button("单文件");
 		setborderColor(oneFileBtn);
 		oneFileBtn.setOnAction((ActionEvent e)->{
@@ -120,12 +161,12 @@ public class TopPanel {
 		createBtn.setOnAction((ActionEvent e) ->{
 			if(oneFile!=null&&oneFile.size()>0){
 				String pdfUrl=fileDoc+File.separator+"more"+File.separator;
-				ImgToPdf.oneFile(oneFile, pdfUrl);
+				ImgUtil.oneFile(oneFile, pdfUrl);
 				oneFile=new ArrayList<>();
 				StartRun.setConter();
 			}else if(moreFile!=null&&moreFile.size()>0){
 				String pdfFile=fileDoc+File.separator+DateUtil.getTime()+".pdf";
-				ImgToPdf.moreFile(moreFile, pdfFile);
+				ImgUtil.moreFile(moreFile, pdfFile);
 				moreFile=new ArrayList<>();
 				StartRun.setConter();
 			}

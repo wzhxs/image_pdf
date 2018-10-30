@@ -10,13 +10,15 @@ import image.pdf.com.util.FileUtil;
 import image.pdf.com.util.StringUtil;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-
+import javafx.stage.StageStyle;
 /**
  * 中间区域处理
  * @author wangzh
@@ -73,6 +75,19 @@ public class ConterPanel {
 				}
 				
 				FileUtil.filterFile(fileUrl, filterList, spaceMap);
+				Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("提示");
+	            alert.setHeaderText(null);
+	            alert.setContentText("处理成功！");
+	            alert.showAndWait();
+	            alert.initStyle(StageStyle.UTILITY); //不显示图标
+	            try {
+					Thread.sleep(1000);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+	            alert.hide();
+	            
 			}
 		});
 		
