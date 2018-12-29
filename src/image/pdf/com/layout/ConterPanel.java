@@ -16,7 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 /**
@@ -107,7 +110,8 @@ public class ConterPanel {
 	    grid.add(spaceText, 1, row+4);
 	    
 		detailPane.getChildren().add(grid);
-		
+		int left=255;
+		detailPane.setBackground(new Background(new BackgroundFill(Color.rgb(left, left, left, .99),null,null)));
 		
 		return detailPane;
 	}

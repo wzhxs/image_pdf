@@ -45,8 +45,6 @@ public class TopPanel {
 	    	StartRun.setTop(createTopMenu());
 			StartRun.setConter(new ConterPanel().createTxtPanel());
 		});
-	    
-
 	    fileMenu.getItems().addAll(txtMenuItem);
 
 	    Menu pdfMenu = new Menu("pdf");
@@ -57,9 +55,6 @@ public class TopPanel {
 			StartRun.setTop(topBox);
 			StartRun.setConter();
 		}); 
-	    
-	    
-		
 	    pdfMenu.getItems().add(pdfMenuItem);
 
 	    Menu imgMenu = new Menu("图片");
@@ -70,17 +65,24 @@ public class TopPanel {
 			StartRun.setTop(topBox);
 			StartRun.setConter();
 	    });
-	    
-	    MenuItem imgMv = new MenuItem("图片移动");
+	    MenuItem imgMv = new MenuItem("图片移动（未）");
 	    imgMenu.getItems().addAll(imgChange,imgMv);
 	    
-	    Menu aboutMenu = new Menu("关于");
+	    Menu webMenu = new Menu("web");
+	    MenuItem requestTest=new MenuItem("请求测试");
+	    requestTest.setOnAction((ActionEvent e)->{
+	    	VBox topBox=new VBox();
+			topBox.getChildren().addAll(createTopMenu());
+			StartRun.setTop(topBox);
+			StartRun.setConter(new WebPanel().createWebRequest());
+	    });
+	    webMenu.getItems().addAll(requestTest);
 	    
+	    Menu aboutMenu = new Menu("关于");
 	    MenuItem authorMenuItem = new MenuItem("作者");
 	    authorMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-	    		
 	            Alert alert = new Alert(AlertType.INFORMATION);
 	            alert.setTitle("作者");
 	            alert.setHeaderText(null);
@@ -90,11 +92,10 @@ public class TopPanel {
 	    
 	    MenuItem exitMenuItem = new MenuItem("退出");
 	    exitMenuItem.setOnAction(actionEvent -> Platform.exit());
-
 	    aboutMenu.getItems().addAll(authorMenuItem,exitMenuItem);
 	    
 	    MenuBar menuBar=new MenuBar();
-	    menuBar.getMenus().addAll(fileMenu, pdfMenu, imgMenu,aboutMenu);
+	    menuBar.getMenus().addAll(fileMenu, pdfMenu, imgMenu,webMenu,aboutMenu);
 	    return menuBar;
     }
     

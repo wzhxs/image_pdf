@@ -41,7 +41,7 @@ public class StartRun extends Application{
 		stage.setScene(scene);
 		stage.setResizable(false);
 		
-		stage.setTitle("个人工具");
+		stage.setTitle("工具");
 		stage.show();
 	}
 	
