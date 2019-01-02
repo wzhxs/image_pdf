@@ -12,6 +12,7 @@ import javafx.stage.Stage;
  * @date 2018年12月29日 下午4:56:50
  */
 public class MainPanel  extends Application{
+	private static Stage stage;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -19,16 +20,19 @@ public class MainPanel  extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		ContralPanel mainPanel=new ContralPanel();
-		mainPanel.init();
+		MainPanel.stage=stage;
+		
 		//pane放入Scen中
-		Scene scene=new Scene(mainPanel.getPane(),910,600);
+		Scene scene=new Scene(ContralPanel.mainPanel,910,600);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		
 		stage.setTitle("工具");
 		stage.show();
 		
+	}
+	
+	public static Stage getStage(){
+		return stage;
 	}
 
 }

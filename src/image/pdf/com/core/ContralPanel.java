@@ -1,38 +1,20 @@
 package image.pdf.com.core;
 
-import javafx.scene.Node;
+import image.pdf.com.core.model.PdfPanel;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 
 public class ContralPanel {
 	
-	private BorderPane mainPanel=new BorderPane();
+	public static BorderPane mainPanel=new BorderPane();
 	
 	/**
 	 * 初始化面板
 	 */
-	public void init(){
+	static{
+		MenuBar menuBar=new MenuBar();
+	    menuBar.getMenus().addAll(new PdfPanel().init());
+		mainPanel.setTop(menuBar);
 		
-	}
-	
-	/**
-	 * 获取面板
-	 * @return
-	 */
-	public BorderPane getPane(){
-		return mainPanel;
-	}
-	
-	/**
-	 * 初始化显示区域
-	 */
-	public void setCenter(Node value){
-		mainPanel.setCenter(value);
-	}
-	
-	/**
-	 * 初始化头
-	 */
-	public void setTop(Node value){
-		mainPanel.setTop(value);
 	}
 }
