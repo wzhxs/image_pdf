@@ -1,38 +1,40 @@
-package image.pdf.com.layout;
+package image.pdf.com.core.model;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import image.pdf.com.StartRun;
+import image.pdf.com.MainPanel;
+import image.pdf.com.core.inter.MenuInter;
 import image.pdf.com.util.FileUtil;
 import image.pdf.com.util.StringUtil;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
-/**
- * 中间区域处理
- * @author wangzh
- * @date 2018年9月21日 下午12:48:32
- */
-public class ConterPanel {
-	
-	/**
-	 * 文本文件
-	 */
-	public AnchorPane createTxtPanel(){
+
+public class TextMenu implements MenuInter<AnchorPane>{
+
+	@Override
+	public MenuItem createMenu() {
+		MenuItem txtMenuItem = new MenuItem("文本过滤");
+	    txtMenuItem.setOnAction((ActionEvent e)->{
+	    	MainPanel.mainPanel.setCenter(createAction());
+		});
+		 return txtMenuItem;
+	}
+
+	@Override
+	public AnchorPane createAction() {
 		AnchorPane detailPane=new  AnchorPane();
 		GridPane grid = new GridPane();
 	    grid.setVgap(4);
@@ -52,7 +54,7 @@ public class ConterPanel {
 	            new FileChooser.ExtensionFilter("All File", "*.*")
 	        );
 	        
-			List<File> txtFile =fileChooser.showOpenMultipleDialog(StartRun.getStage());
+			List<File> txtFile =fileChooser.showOpenMultipleDialog(MainPanel.getStage());
 			if(txtFile!=null&&txtFile.size()>0){
 				inputText.setText(txtFile.get(0).toString());	
 			}
@@ -110,11 +112,11 @@ public class ConterPanel {
 	    grid.add(spaceText, 1, row+4);
 	    
 		detailPane.getChildren().add(grid);
-		int left=255;
-		detailPane.setBackground(new Background(new BackgroundFill(Color.rgb(left, left, left, .99),null,null)));
+		
+//		int left=255;
+//		detailPane.setBackground(new Background(new BackgroundFill(Color.rgb(left, left, left, .99),null,null)));
 		
 		return detailPane;
 	}
-	
 
 }

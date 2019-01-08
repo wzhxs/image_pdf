@@ -5,13 +5,13 @@ import image.pdf.com.core.inter.PanelInter;
 import javafx.scene.control.Menu;
 
 @PanelAnnotation
-public class PdfPanel implements PanelInter{
+public class TextPanel implements PanelInter{
 
 	@Override
 	public Menu init() {
-		Menu menu = new Menu("pdf");
-	    menu.getItems().add(new PdfMenu().createMenu());
-	    return menu;
+		Menu menu = new Menu("文本");
+		menu.getItems().add(new TextMenu().createMenu());
+		return menu;
 	}
-	
+
 }

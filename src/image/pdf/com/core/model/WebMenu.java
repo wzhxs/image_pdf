@@ -1,13 +1,16 @@
-package image.pdf.com.layout;
+package image.pdf.com.core.model;
 
-
+import image.pdf.com.MainPanel;
+import image.pdf.com.core.inter.MenuInter;
 import image.pdf.com.util.HttpUtil;
 import image.pdf.com.util.StringUtil;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
@@ -18,11 +21,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class WebPanel {
-	
-	public AnchorPane createWebRequest(){
-	    
-	    GridPane grid = new GridPane();
+public class WebMenu implements MenuInter<AnchorPane>{
+
+	@Override
+	public MenuItem createMenu() {
+		MenuItem requestTest=new MenuItem("请求测试");
+	    requestTest.setOnAction((ActionEvent e)->{
+	    	MainPanel.mainPanel.setCenter(createAction());
+	    });
+		 
+		return requestTest;
+	}
+
+	@Override
+	public AnchorPane createAction() {
+		GridPane grid = new GridPane();
 	    grid.setVgap(4);
 	    grid.setHgap(10);
 	    grid.setPadding(new Insets(15, 5, 5, 20));
@@ -39,7 +52,7 @@ public class WebPanel {
 		detailPane.getChildren().addAll(grid,text);
 		return detailPane;
 	}
-
+	
 	private AnchorPane createMainPane(){
 		AnchorPane detailPane=new AnchorPane();
 		detailPane.setPrefWidth(400.0);
