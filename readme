@@ -2,3 +2,42 @@
 2D图形处理：https://blog.csdn.net/qq_37990226/article/details/79219671
 
 2018年8月27日：图片转pdf工具完成，主要功能选择图片，生成单张或多张图片。
+
+fx教程：
+	https://code.makery.ch/zh-cn/library/javafx-tutorial/
+	https://www.yiibai.com/javafx
+
+官方文档：https://docs.oracle.com/javafx/2/ui_controls/jfxpub-ui_controls.htm
+W3Cschool文档：https://www.w3cschool.cn/java/javafx-textfield.html
+
+信息窗：http://blog.sina.com.cn/s/blog_a231c5270102x0i1.html
+
+好的项目：https://github.com/rememberber/WeSync
+2D图形处理：https://blog.csdn.net/qq_37990226/article/details/79219671
+图片处理API：https://docs.oracle.com/javafx/2/api/javafx/scene/image/ImageView.html
+
+说明：
+	splitpane：从左到右排版
+	hbox：横向
+	vbox：纵向
+	TextField：单行文本框
+	TextArea:多行文本框
+	AnchorPane：网络布局
+	GridPane：网格布局
+	FlowPane:水平铺放,或垂直
+	StackPane：包含的内容，居中
+	ScrollPane:含滚动条窗体
+	
+	
+	组件添加样式
+	left.setStyle("-fx-border-color: yellow;-fx-border-width: inherit;");
+	
+	
+ 目标：
+ 	1、时间戳转化
+ 	2、xml格式化
+ 	3、json格式化
+ 	4、内容比较
+ 	
+ 任务：
+ 	txt文件过滤成指定格式文件

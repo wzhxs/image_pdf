@@ -10,13 +10,16 @@ import image.pdf.com.core.inter.MenuInter;
 import image.pdf.com.util.DateUtil;
 import image.pdf.com.util.ImgUtil;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class PdfMenu implements MenuInter<HBox>{
@@ -69,6 +72,7 @@ public class PdfMenu implements MenuInter<HBox>{
 				ImgUtil.moreFile(moreFile, pdfFile);
 				moreFile=new ArrayList<>();
 			}
+			MainPanel.mainPanel.setCenter(createAction());
 		});
 	    
 	    title.getChildren().setAll(oneFileBtn,moreFileBtn,createBtn);
@@ -83,6 +87,13 @@ public class PdfMenu implements MenuInter<HBox>{
 		flowPane.setPrefHeight(600);
 		
 		for(File file:fileList){
+			if(file.toString().endsWith("jpg")){
+				Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("异常");
+	            alert.setHeaderText(null);
+	            alert.setContentText(file+" Is Not Jpg");
+	            alert.showAndWait();
+			}
 			
 			Image image=new Image("file:"+file.toString());
 			ImageView imageView = new ImageView(image);
@@ -93,7 +104,9 @@ public class PdfMenu implements MenuInter<HBox>{
 		
 		imagePane.setContent(flowPane);
 		
-		MainPanel.mainPanel.setCenter(imagePane);
+		VBox vbox=new VBox();
+		vbox.getChildren().setAll(createAction(),imagePane);
+		MainPanel.mainPanel.setCenter(vbox);
 	}
 
 }

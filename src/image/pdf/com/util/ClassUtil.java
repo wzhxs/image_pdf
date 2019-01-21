@@ -30,7 +30,6 @@ public class ClassUtil {
 		  List<Class<?>> fileList=getClassListByInterface("image.pdf.com",PanelInter.class);
 			
 			for(Class<?> clazz:fileList){
-				System.out.println(clazz.getName());
 				PanelInter panel;
 				try {
 					panel = (PanelInter) clazz.newInstance();
