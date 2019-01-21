@@ -87,12 +87,13 @@ public class PdfMenu implements MenuInter<HBox>{
 		flowPane.setPrefHeight(600);
 		
 		for(File file:fileList){
-			if(file.toString().endsWith("jpg")){
+			if(!file.toString().endsWith("jpg")){
 				Alert alert = new Alert(AlertType.INFORMATION);
 	            alert.setTitle("异常");
 	            alert.setHeaderText(null);
 	            alert.setContentText(file+" Is Not Jpg");
 	            alert.showAndWait();
+	            MainPanel.mainPanel.setCenter(createAction());
 			}
 			
 			Image image=new Image("file:"+file.toString());
