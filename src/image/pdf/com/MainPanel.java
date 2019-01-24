@@ -1,6 +1,11 @@
 package image.pdf.com;
 
+import image.pdf.com.core.model.AboutPanel;
+import image.pdf.com.core.model.ImgPanel;
 import image.pdf.com.core.model.PdfMenu;
+import image.pdf.com.core.model.PdfPanel;
+import image.pdf.com.core.model.TextPanel;
+import image.pdf.com.core.model.WebPanel;
 import image.pdf.com.util.ClassUtil;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -26,8 +31,9 @@ public class MainPanel  extends Application{
 	public void start(Stage stage) throws Exception {
 		
 		MenuBar menuBar=new MenuBar();
-//	    menuBar.getMenus().addAll(new PdfPanel().init(),new TextPanel().init(),new WebPanel().init(),new ImgPanel().init(),new AboutPanel().init());
-		ClassUtil.load(menuBar);
+		Class<?>[] panelClass={PdfPanel.class,TextPanel.class,WebPanel.class,ImgPanel.class,AboutPanel.class};
+		ClassUtil.load(menuBar,panelClass);
+		
 		mainPanel.setTop(menuBar);
 		mainPanel.setCenter(new PdfMenu().createAction());
 		

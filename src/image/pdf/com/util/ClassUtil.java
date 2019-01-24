@@ -26,10 +26,13 @@ public class ClassUtil {
 	    return Thread.currentThread().getContextClassLoader();
 	  }
 	  
-	  public static void load(MenuBar menuBar){
-		  List<Class<?>> fileList=getClassListByInterface("image.pdf.com",PanelInter.class);
-			
-			for(Class<?> clazz:fileList){
+	  /**
+	   * 自定义类
+	   * @param menuBar
+	   * @param menuClass
+	   */
+	  public static void load(MenuBar menuBar, Class<?>[] panelClass) {
+		  for(Class<?> clazz:panelClass){
 				PanelInter panel;
 				try {
 					panel = (PanelInter) clazz.newInstance();
@@ -38,6 +41,18 @@ public class ClassUtil {
 					e.printStackTrace();
 				}
 			}
+	  }
+	  
+	  /**
+	   * 自动扫描类
+	   * @param menuBar
+	   */
+	  public static void load(MenuBar menuBar){
+		  List<Class<?>> fileList=getClassListByInterface("image.pdf.com",PanelInter.class);
+		  Class<?>[] panelClass = new Class<?>[fileList.size()];
+		  fileList.toArray(panelClass);
+		  
+		  load(menuBar,panelClass);
 	  }
 
 	  public static String getClassPath(){
@@ -354,4 +369,5 @@ public class ClassUtil {
 	           e.printStackTrace();
 	       }
 	   }
+
 }
