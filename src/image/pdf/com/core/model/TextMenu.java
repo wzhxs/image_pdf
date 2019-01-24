@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import image.pdf.com.MainPanel;
+import image.pdf.com.core.common.Common;
 import image.pdf.com.core.inter.MenuInter;
 import image.pdf.com.util.FileUtil;
 import image.pdf.com.util.StringUtil;
@@ -36,6 +37,8 @@ public class TextMenu implements MenuInter<AnchorPane>{
 	@Override
 	public AnchorPane createAction() {
 		AnchorPane detailPane=new  AnchorPane();
+		Common.setBackColor(detailPane);
+		
 		GridPane grid = new GridPane();
 	    grid.setVgap(4);
 	    grid.setHgap(10);

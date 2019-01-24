@@ -36,6 +36,8 @@ public class ImgChangeMenu implements MenuInter<HBox>{
 	public HBox createAction() {
 		FileChooser fileChooser=Common.getSelectFile(); 
 		HBox  title=new HBox();
+		Common.setBackColor(title);
+		
 		Button moreFileBtn = new Button("选择");
 		moreFileBtn.setOnAction((ActionEvent e)->{
 			fileChooser.setTitle("MoreFile");

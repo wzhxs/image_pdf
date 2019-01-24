@@ -1,6 +1,7 @@
 package image.pdf.com.core.model;
 
 import image.pdf.com.MainPanel;
+import image.pdf.com.core.common.Common;
 import image.pdf.com.core.inter.MenuInter;
 import image.pdf.com.util.HttpUtil;
 import image.pdf.com.util.StringUtil;
@@ -14,10 +15,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -56,10 +54,7 @@ public class WebMenu implements MenuInter<AnchorPane>{
 	private AnchorPane createMainPane(){
 		AnchorPane detailPane=new AnchorPane();
 		detailPane.setPrefWidth(400.0);
-		
-		
-		int left=255;
-		detailPane.setBackground(new Background(new BackgroundFill(Color.rgb(left, left, left, .99),null,null)));
+		Common.setBackColor(detailPane);
 		return detailPane;
 	}
 

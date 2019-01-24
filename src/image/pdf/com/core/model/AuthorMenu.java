@@ -22,7 +22,6 @@ public class AuthorMenu implements MenuInter<AnchorPane>{
 	            alert.setContentText("王宗会个人工具");
 	            alert.showAndWait();
         }});
-	   
 	    return authorMenuItem;
 	}
 
