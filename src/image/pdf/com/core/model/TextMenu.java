@@ -116,8 +116,6 @@ public class TextMenu implements MenuInter<AnchorPane>{
 	    
 		detailPane.getChildren().add(grid);
 		
-//		int left=255;
-//		detailPane.setBackground(new Background(new BackgroundFill(Color.rgb(left, left, left, .99),null,null)));
 		
 		return detailPane;
 	}

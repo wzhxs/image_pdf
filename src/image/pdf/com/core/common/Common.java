@@ -19,11 +19,10 @@ public final class Common {
 	public static String fileDoc=System.getProperty("user.home")+File.separator+"Desktop";
 	
 	/**
-	 * 配置按钮
-	 * @param btn
+	 * 配置按钮边框色
 	 */
 	public static void setborderColor(Button btn){
-		btn.setStyle("-fx-border-color: #E1E1E1;");
+//		btn.setStyle("-fx-padding: 0.7em 0.57em;-fx-font-size: 12px;-jfx-button-type: RAISED;-fx-background-color: rgb(77,102,204);-fx-pref-width: 60;-fx-text-fill: WHITE;");
 	}
 	
 	/**

@@ -10,7 +10,7 @@ public class TextPanel implements PanelInter{
 	@Override
 	public Menu init() {
 		Menu menu = new Menu("文本");
-		menu.getItems().add(new TextMenu().createMenu());
+		menu.getItems().addAll(new TextMenu().createMenu(),new ColumnToRow().createMenu());
 		return menu;
 	}
 
