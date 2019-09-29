@@ -44,7 +44,7 @@ public class ClassUtil {
 	  }
 	  
 	  /**
-	   * 自动扫描类
+	   * 自动扫描类，缺点，无法指定顺序
 	   * @param menuBar
 	   */
 	  public static void load(MenuBar menuBar){

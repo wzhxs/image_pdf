@@ -39,7 +39,7 @@ public class WebMenu implements MenuInter<AnchorPane>{
 	    grid.setPadding(new Insets(15, 5, 5, 20));
 	    
 	    
-	    Text text = new Text(10, 50, "");     
+	    Text text = new Text(20, 100, "");     
 		text.prefWidth(400);         
 		text.setFont(new Font(12));
 		
@@ -60,6 +60,7 @@ public class WebMenu implements MenuInter<AnchorPane>{
 
 	public void doQuest(GridPane grid,Text output){
 		TextField inputText = new TextField();
+		TextField paramText = new TextField();
 			
 		//下拉框
 		ChoiceBox<Object> choiceBox=new ChoiceBox<>();
@@ -77,7 +78,8 @@ public class WebMenu implements MenuInter<AnchorPane>{
 					if(choiceBox.getSelectionModel().getSelectedIndex()==0){  //get
 						output.setText(HttpUtil.getContext(text));
 					}else{
-						output.setText(HttpUtil.sendPost(text,""));    //post
+						
+						output.setText(HttpUtil.sendPost(text,paramText.getText()));    //post
 					}
 				}
 			}
@@ -89,6 +91,9 @@ public class WebMenu implements MenuInter<AnchorPane>{
 	    grid.add(inputText, 1, row);
 	    grid.add(choiceBox, 2, row);
 	    grid.add(chang, 3, row);
+	    
+	    grid.add(new Label("请求参数："), 0, row+2);
+	    grid.add(paramText, 1, row+2);
 	}
 
 }

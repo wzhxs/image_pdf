@@ -31,8 +31,10 @@ public class MainPanel  extends Application{
 	public void start(Stage stage) throws Exception {
 		
 		MenuBar menuBar=new MenuBar();
-		Class<?>[] panelClass={PdfPanel.class,TextPanel.class,WebPanel.class,ImgPanel.class,AboutPanel.class};
+		Class<?>[] panelClass={PdfPanel.class,ImgPanel.class,TextPanel.class,WebPanel.class,AboutPanel.class}; //};//
 		ClassUtil.load(menuBar,panelClass);
+		
+		ClassUtil.load(menuBar);
 		
 		mainPanel.setTop(menuBar);
 		mainPanel.setCenter(new PdfMenu().createAction());

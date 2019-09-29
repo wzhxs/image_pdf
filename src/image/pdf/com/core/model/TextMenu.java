@@ -17,11 +17,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-import javafx.stage.StageStyle;
 
 public class TextMenu implements MenuInter<AnchorPane>{
 
@@ -38,6 +38,8 @@ public class TextMenu implements MenuInter<AnchorPane>{
 	public AnchorPane createAction() {
 		AnchorPane detailPane=new  AnchorPane();
 		Common.setBackColor(detailPane);
+		
+		RadioButton radio = new RadioButton("仅首个");
 		
 		GridPane grid = new GridPane();
 	    grid.setVgap(4);
@@ -77,18 +79,26 @@ public class TextMenu implements MenuInter<AnchorPane>{
 					String[] hashMap=space.split("\\,");
 					String[] key;
 					for(String hash:hashMap){
-						key=hash.split("\\=");
-						spaceMap.put(key[0], key[1]);
+						if(hash.contains("=")){
+							key=hash.split("\\=");
+							if(StringUtil.isEmpty(key[1])){
+								spaceMap.put(key[0], "");
+							}else{
+								spaceMap.put(key[0], key[1]);
+							}
+							
+						}
+						
 					}
 				}
+				FileUtil.filterFile(fileUrl, filterList, spaceMap,radio.isSelected());
 				
-				FileUtil.filterFile(fileUrl, filterList, spaceMap);
 				Alert alert = new Alert(AlertType.INFORMATION);
 	            alert.setTitle("提示");
 	            alert.setHeaderText(null);
 	            alert.setContentText("处理成功！");
 	            alert.showAndWait();
-	            alert.initStyle(StageStyle.UTILITY); //不显示图标
+//	            alert.initStyle(StageStyle.UTILITY); //不显示图标
 	            try {
 					Thread.sleep(1000);
 				} catch (Exception e1) {
@@ -100,19 +110,19 @@ public class TextMenu implements MenuInter<AnchorPane>{
 		});
 		
 		int row=3;  //第几行
-	    grid.add(new Label("文件："), 0, row);
-	    grid.add(inputText, 1, row);
-	    grid.add(choseBtn, 2, row);
-	    grid.add(createBtn, 3, row);
-	   
+	    grid.add(new Label("文件："), 2, row);
+	    grid.add(inputText, 3, row);
 	    
+	    grid.add(new Label("过滤："), 2, row+2);
+	    grid.add(filterText, 3, row+2);
 	    
-	    grid.add(new Label("过滤："), 0, row+2);
-	    grid.add(filterText, 1, row+2);
+	    grid.add(new Label("替换："), 2, row+4);
+	    grid.add(spaceText, 3, row+4);
 	    
+	    grid.add(radio, 2, row+6);
 	    
-	    grid.add(new Label("替换："), 0, row+4);
-	    grid.add(spaceText, 1, row+4);
+	    grid.add(choseBtn, 2, row+8);
+	    grid.add(createBtn, 3, row+8);
 	    
 		detailPane.getChildren().add(grid);
 		

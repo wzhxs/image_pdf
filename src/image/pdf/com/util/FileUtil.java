@@ -30,12 +30,14 @@ public final class FileUtil {
 	
 	/**
 	 * 替换和过滤内容方法
-	 * @param fileUrl
-	 * @param filterList
-	 * @param spaceMap
+	 * @param fileUrl 文件路径
+	 * @param filterList 过滤集合
+	 * @param spaceMap 替换集合
+	 * @param firstState 是否仅替换第一个个
 	 */
-	public static void filterFile(String fileUrl,String[] filterList,Map<String,String> spaceMap){
+	public static void filterFile(String fileUrl,String[] filterList,Map<String,String> spaceMap,boolean firstState){
 		try {
+			System.out.println(fileUrl+firstState);
 			FileInputStream inputStream  = new FileInputStream(fileUrl);
 			
 			BufferedReader buf=new BufferedReader(new InputStreamReader(inputStream));
@@ -52,12 +54,17 @@ public final class FileUtil {
 						break;
 					}
 				}
-				if(state==1){
+				if(state==1&&spaceMap.size()<=0){
 					continue;
 				}
 				
 				for(String space:spaceMap.keySet()){
-					context=context.replace(space, spaceMap.get(space));
+					if(!firstState){
+						context=context.replace(space, spaceMap.get(space));
+					}else{
+						context=context.replaceFirst(space, spaceMap.get(space));
+					}
+					
 				}
 				write.write(context+System.getProperty("line.separator"));
 			}
