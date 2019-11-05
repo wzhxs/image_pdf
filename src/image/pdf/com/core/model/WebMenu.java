@@ -59,7 +59,7 @@ public class WebMenu implements MenuInter<AnchorPane>{
 	}
 
 	public void doQuest(GridPane grid,Text output){
-		TextField inputText = new TextField();
+		TextField requestUrl = new TextField();
 		TextField paramText = new TextField();
 			
 		//下拉框
@@ -70,16 +70,16 @@ public class WebMenu implements MenuInter<AnchorPane>{
 		
 		Button chang=new Button("请求");
 		chang.setOnAction( event -> {
-			String text=inputText.getText();
-			if(StringUtil.isEmpty(text)){
+			String url=requestUrl.getText();
+			if(StringUtil.isEmpty(url)){
 				output.setText("网址不能为空");
 			}else{
-				if(text.startsWith("http")){
+				if(url.startsWith("http")){
 					if(choiceBox.getSelectionModel().getSelectedIndex()==0){  //get
-						output.setText(HttpUtil.getContext(text));
+						output.setText(HttpUtil.getContext(url));
 					}else{
 						
-						output.setText(HttpUtil.sendPost(text,paramText.getText()));    //post
+						output.setText(HttpUtil.sendPost(url,paramText.getText()));    //post
 					}
 				}
 			}
@@ -88,7 +88,7 @@ public class WebMenu implements MenuInter<AnchorPane>{
 		
 		int row=0;
 		grid.add(new Label("请求地址："), 0, row);
-	    grid.add(inputText, 1, row);
+	    grid.add(requestUrl, 1, row);
 	    grid.add(choiceBox, 2, row);
 	    grid.add(chang, 3, row);
 	    
