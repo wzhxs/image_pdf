@@ -24,7 +24,11 @@
 * 反射 
 
 ## 操作记录
-2019-01-02：改用新结构设计、实现功能 
-2019-09-29：* 优化文本处理，增加过滤只过滤第一个对象，调整整个布局。
-			* 增加web功能，post请求参数输入。
-			* 导入run jar报错：java.lang.ClassNotFoundException: org.bouncycastle.jce.provider.BouncyCastleProvider，导出普通jar，指定main方法无此问题。
+* 2019-01-02
+	* 改用新结构设计、实现功能 
+* 2019-09-29
+    * 优化文本处理，增加过滤只过滤第一个对象，调整整个布局。
+	* 增加web功能，post请求参数输入。
+
+### 记录 
+*  导入run jar报错：java.lang.ClassNotFoundException: org.bouncycastle.jce.provider.BouncyCastleProvider，导出普通jar，指定main方法无此问题。
