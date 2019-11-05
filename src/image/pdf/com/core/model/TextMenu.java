@@ -41,10 +41,6 @@ public class TextMenu implements MenuInter<AnchorPane>{
 		
 		RadioButton radio = new RadioButton("仅首个");
 		
-		GridPane grid = new GridPane();
-	    grid.setVgap(4);
-	    grid.setHgap(10);
-	    grid.setPadding(new Insets(15, 5, 5, 20));
 	    TextField inputText = new TextField();
 	    
 	    TextField filterText = new TextField();
@@ -109,9 +105,14 @@ public class TextMenu implements MenuInter<AnchorPane>{
 			}
 		});
 		
+		GridPane grid = new GridPane();
+	    grid.setVgap(4);
+	    grid.setHgap(10);
+	    grid.setPadding(new Insets(15, 5, 5, 20));
 		int row=3;  //第几行
 	    grid.add(new Label("文件："), 2, row);
 	    grid.add(inputText, 3, row);
+	    grid.add(choseBtn, 4, row);
 	    
 	    grid.add(new Label("过滤："), 2, row+2);
 	    grid.add(filterText, 3, row+2);
@@ -121,7 +122,7 @@ public class TextMenu implements MenuInter<AnchorPane>{
 	    
 	    grid.add(radio, 2, row+6);
 	    
-	    grid.add(choseBtn, 2, row+8);
+	    
 	    grid.add(createBtn, 3, row+8);
 	    
 		detailPane.getChildren().add(grid);

@@ -42,7 +42,11 @@ public final class StringUtil {
 	 * 判断是否为数字，正负数和 小数
 	 */
 	public static boolean isNumber(String context) {
-		Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]+");
+		String regx="-?[0-9]+";
+		if(context.contains(".")){
+			regx="-?[0-9]+.?[0-9]+";
+		}
+		Pattern pattern = Pattern.compile(regx);
 		Matcher isNum = pattern.matcher(context);
 		if (!isNum.matches()) {
 			return false;

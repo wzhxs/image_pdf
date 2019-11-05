@@ -31,7 +31,7 @@ public class ClassUtil {
 	   * @param menuBar
 	   * @param menuClass
 	   */
-	  public static void load(MenuBar menuBar, Class<?>[] panelClass) {
+	  public static MenuBar load(MenuBar menuBar, Class<?>[] panelClass) {
 		  for(Class<?> clazz:panelClass){
 				PanelInter panel;
 				try {
@@ -41,6 +41,7 @@ public class ClassUtil {
 					e.printStackTrace();
 				}
 			}
+		  return menuBar;
 	  }
 	  
 	  /**
